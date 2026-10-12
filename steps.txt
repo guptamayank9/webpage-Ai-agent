@@ -94,6 +94,8 @@ scrapeWebpage('https://gupta-mayank.netlify.app').then(console.log); ye
 
 f//vectors conevert by useing head data
 ussi ke andr hi bnana hai
+make file of .env with open ia key
+and run aslo npm i dotenv
 
 async function generateVectorEmbeddings({url, head, body}) {
 
