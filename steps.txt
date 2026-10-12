@@ -1,0 +1,104 @@
+npm init
+
+#docker-compose.yaml
+
+#chromadb use for vector emdedding
+#chroma docker use
+
+
+#website sc rapping we use cheerio or axios
+npm install cheerio use this
+also npm i axios
+
+
+
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+
+//jis bhi website ko scrape
+//  krnea hai uske liye url de dena
+
+async function scrapeWebpage(url = '') {
+    //html aa gya 
+    const {data} = await axios.get(url);
+
+    const $ = cheerio.load(data);
+
+    const pageHead = $('head').html();
+    const pageBody = $('body').html();
+
+
+   console.log({pageHead}); or    console.log({pageBody}); isko bhi dekh skte hai
+}
+scrapeWebpage('https://gupta-mayank.netlify.app'); 
+//apge k head tag de dgea ye
+
+
+//for links ke liye lene ke liye we use this
+ //for page body
+    const pageBody = $('body').html();
+
+    //for links ke laane ke liye we use this
+    
+    $('a').each((_, el)=>{
+
+        const link = $(el).attr('href');
+        console.log(link);
+
+    })
+//ye external or internal links bhi deta hai toh abhi 
+hum sirf internal loiks lenge
+
+
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+
+//jis bhi website ko scrape
+//  krnea hai uske liye url de dena
+
+async function scrapeWebpage(url = '') {
+    //html aa gya 
+    const {data} = await axios.get(url);
+
+    const $ = cheerio.load(data);
+   //for page head
+    const pageHead = $('head').html();
+    //for page body
+    const pageBody = $('body').html();
+
+    //for links ke laane ke liye we use this
+    const  internalLinks = []
+    const externalLinks = []
+
+    $('a').each((_, el)=>{
+
+        const link = $(el).attr('href');
+        if(link === '/') return;
+        if(link.startsWith('http') || link.startsWith('http')){
+            externalLinks.push(link);
+        }else{
+            internalLinks.push(link);
+        }
+    });
+
+    return {head:pageHead, body:pageBody, internalLinks, externalLinks };
+
+
+}
+scrapeWebpage('https://gupta-mayank.netlify.app').then(console.log); ye 
+//ye pura hai
+
+
+//next statep website ko scarape ke baad vector me convert krna hai
+
+
+f//vectors conevert by useing head data
+ussi ke andr hi bnana hai
+
+async function generateVectorEmbeddings({url, head, body}) {
+
+    //we use openai vector emdedding
+    
+}
+
+
